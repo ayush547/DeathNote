@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
-        android:background="@android:color/white"
         android:text="Enter Date and Location"
         android:textSize="32sp"
         android:gravity="center"/>
@@ -109,7 +108,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/yearSpinner"
-            android:hint="Select Month"/>
+            android:hint="Select Year"/>
     </LinearLayout>
 
     <TextView
