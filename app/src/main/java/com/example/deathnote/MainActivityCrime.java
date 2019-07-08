@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,14 +26,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivityCrime extends Activity {
 
-    double lat,lng;
+    private static final String TAG = "MainActivityCrime";
+    double lat, lng;
     String date;
-    TextView LatView,LonView,DateView;
+    TextView LatView, LonView, DateView;
     List<CrimesData> storageCopy = new ArrayList<>();
     RecyclerViewAdapterCrime adapter;
     RecyclerView recyclerView;
+    ProgressBar bar;
 
-    private static final String TAG = "MainActivityCrime";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +42,18 @@ public class MainActivityCrime extends Activity {
         LatView = findViewById(R.id.latitude);
         LonView = findViewById(R.id.longitude);
         DateView = findViewById(R.id.date);
+        bar = findViewById(R.id.bar);
 
         Intent in = getIntent();
-        lat = in.getDoubleExtra("lat",52.629729);
-        lng = in.getDoubleExtra("lng",-1.131592);
+        lat = in.getDoubleExtra("lat", 52.629729);
+        lng = in.getDoubleExtra("lng", -1.131592);
         date = in.getStringExtra("date");
 
-        LatView.setText("Latitude - "+lat);
-        LonView.setText("Longitude - "+lng);
-        DateView.setText("Date - "+date);
-        Toast.makeText(getApplicationContext(),"Fetching Data",Toast.LENGTH_SHORT).show();
+        LatView.setText("Latitude - " + lat);
+        LonView.setText("Longitude - " + lng);
+        DateView.setText("Date - " + date);
+        Toast.makeText(getApplicationContext(), "Fetching Data", Toast.LENGTH_SHORT).show();
+        bar.setVisibility(View.VISIBLE);
         initData();
     }
 
@@ -58,30 +63,32 @@ public class MainActivityCrime extends Activity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         CrimesAPI crimesAPI = retrofit.create(CrimesAPI.class);
-        Call<List<CrimesData>> callForces = crimesAPI.getCrimeDetails(date,lat,lng);
+        Call<List<CrimesData>> callForces = crimesAPI.getCrimeDetails(date, lat, lng);
         callForces.enqueue(new Callback<List<CrimesData>>() {
             @Override
             public void onResponse(Call<List<CrimesData>> call, Response<List<CrimesData>> response) {
                 storageCopy = response.body();
-                for(CrimesData h: storageCopy){
-                    Log.d("name",h.getId());
+                for (CrimesData h : storageCopy) {
+                    Log.d("name", h.getId());
                 }
-                initRecyclerView();
+                bar.setVisibility(View.GONE);
+                if(storageCopy.size()!=0) initRecyclerView();
+                else Toast.makeText(getApplicationContext(),"No matches found",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<List<CrimesData>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
-                Log.d(TAG,t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, t.getMessage());
             }
         });
     }
 
-    private void initRecyclerView(){
-            Log.d(TAG,"initialising Recycler View");
-            recyclerView = findViewById(R.id.recyclerView);
-            adapter = new RecyclerViewAdapterCrime(this,storageCopy);
-            recyclerView.setAdapter(adapter);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+    private void initRecyclerView() {
+        Log.d(TAG, "initialising Recycler View");
+        recyclerView = findViewById(R.id.recyclerView);
+        adapter = new RecyclerViewAdapterCrime(this, storageCopy);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }

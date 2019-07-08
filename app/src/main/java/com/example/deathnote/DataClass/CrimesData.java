@@ -1,7 +1,5 @@
 package com.example.deathnote.DataClass;
 
-import com.google.gson.annotations.SerializedName;
-
 public class CrimesData {
 
     private class Outcome_status{

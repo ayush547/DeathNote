@@ -6,6 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.deathnote.API.ForcesAPI;
@@ -23,10 +25,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends Activity implements android.support.v7.widget.SearchView.OnQueryTextListener {
 
-    SearchView searchBox;
     private static final String TAG = "MainActivity";
+    SearchView searchBox;
     RecyclerViewAdapter adapter;
     RecyclerView recyclerView;
+    ProgressBar bar;
     private List<ForcesData> dataNames = new ArrayList<>();
     private List<ForcesData> storageCopy = new ArrayList<>();
 
@@ -35,10 +38,11 @@ public class MainActivity extends Activity implements android.support.v7.widget.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         searchBox = findViewById(R.id.searchForces);
+        bar = findViewById(R.id.bar);
         searchBox.setOnQueryTextListener(this);
         searchBox.setIconifiedByDefault(false);
-        Log.d(TAG,"onCreate started");
-        Toast.makeText(getApplicationContext(),"Fetching Data",Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "onCreate started");
+        bar.setVisibility(View.VISIBLE);
         initData();
 
     }
@@ -55,28 +59,29 @@ public class MainActivity extends Activity implements android.support.v7.widget.
             @Override
             public void onResponse(Call<List<ForcesData>> call, Response<List<ForcesData>> response) {
                 storageCopy = response.body();
-                for(ForcesData h: storageCopy){
-                    Log.d("name",h.getID());
+                for (ForcesData h : storageCopy) {
+                    Log.d("name", h.getID());
                 }
+                bar.setVisibility(View.GONE);
                 fitData();
             }
 
             @Override
             public void onFailure(Call<List<ForcesData>> call, Throwable t) {
-                Toast.makeText(getApplicationContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    private void fitData(){
+    private void fitData() {
         dataNames.addAll(storageCopy);
         initRecyclerView();
     }
 
-    private void initRecyclerView(){
-        Log.d(TAG,"initialising Recycler View");
+    private void initRecyclerView() {
+        Log.d(TAG, "initialising Recycler View");
         recyclerView = findViewById(R.id.recyclerView);
-        adapter = new RecyclerViewAdapter(this,dataNames);
+        adapter = new RecyclerViewAdapter(this, dataNames);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
@@ -90,8 +95,8 @@ public class MainActivity extends Activity implements android.support.v7.widget.
     public boolean onQueryTextChange(String s) {
         String userInput = s.toLowerCase();
         dataNames.clear();
-        for (ForcesData f: storageCopy){
-            if(f.getName().toLowerCase().contains(userInput))
+        for (ForcesData f : storageCopy) {
+            if (f.getName().toLowerCase().contains(userInput))
                 dataNames.add(f);
         }
         adapter.updateList(dataNames);

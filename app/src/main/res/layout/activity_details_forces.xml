@@ -3,50 +3,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsForcesActivity"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    android:background="@drawable/background">
+    tools:context=".DetailsForcesActivity">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_margin="16dp"
-        android:textSize="32sp"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:background="@android:color/white"
         android:id="@+id/forceTitle"
-        android:visibility="invisible"/>
-
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
+        android:layout_margin="16dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@android:color/black"
+        android:textSize="32sp"
+        android:visibility="invisible" />
+
+    <TextView
         android:id="@+id/forceID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:visibility="invisible"
         android:layout_marginBottom="16dp"
-        android:textColor="@android:color/black"
         android:background="@android:color/white"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:visibility="invisible" />
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.3"
+        android:id="@+id/bar"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:layout_weight="1">
 
         <TextView
+            android:id="@+id/forceDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/forceDescription"
-            android:textColor="@android:color/black"
-            android:text="Fetching data"
+            android:background="@android:color/white"
             android:gravity="center"
-            android:textSize="24sp"
-            android:background="@android:color/white"/>
+            android:visibility="invisible"
+            android:textColor="@android:color/black"
+            android:textSize="24sp" />
 
     </ScrollView>
 

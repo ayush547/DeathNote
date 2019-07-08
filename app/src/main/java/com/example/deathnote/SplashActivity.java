@@ -12,7 +12,8 @@ import android.widget.TextView;
 public class SplashActivity extends Activity {
 
     TextView welcome;
-    Button police,crime,fav;
+    Button police, crime, fav;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,28 +26,28 @@ public class SplashActivity extends Activity {
         ObjectAnimator animation = ObjectAnimator.ofFloat(welcome, "translationY", 200f);
         animation.setDuration(2000);
         animation.start();
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 police.setVisibility(View.VISIBLE);
                 crime.setVisibility(View.VISIBLE);
                 fav.setVisibility(View.VISIBLE);
             }
-        },2100);
+        }, 2100);
     }
 
     public void outToPoliceForce(View view) {
-        Intent outToPoliceForce = new Intent(this,MainActivity.class);
+        Intent outToPoliceForce = new Intent(this, MainActivity.class);
         startActivity(outToPoliceForce);
     }
 
     public void outToCrimeDetails(View view) {
-        Intent outToCrimeSelector = new Intent(this,DetailsCrimesSelectorActivity.class);
+        Intent outToCrimeSelector = new Intent(this, DetailsCrimesSelectorActivity.class);
         startActivity(outToCrimeSelector);
     }
 
     public void outToFavourites(View view) {
-        Intent outToFav = new Intent(this,FavouriteCrimesActivity.class);
+        Intent outToFav = new Intent(this, FavouriteCrimesActivity.class);
         startActivity(outToFav);
     }
 }

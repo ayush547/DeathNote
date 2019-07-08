@@ -4,32 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsCrimesActivity"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    android:background="@drawable/background">
-    
+    tools:context=".DetailsCrimesActivity">
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:textSize="32sp"
-        android:text="Detailed Crime Records"
-        android:gravity="center"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="@android:color/white"/>
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="Detailed Crime Records"
+        android:textSize="32sp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_margin="8dp"
+        android:layout_weight="1"
         android:background="@android:color/white">
+
         <TextView
+            android:id="@+id/detailCrimeView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:id="@+id/detailCrimeView"
             android:textColor="@android:color/black"
-            android:textSize="32sp"/>
+            android:textSize="32sp" />
     </ScrollView>
 
 </LinearLayout>

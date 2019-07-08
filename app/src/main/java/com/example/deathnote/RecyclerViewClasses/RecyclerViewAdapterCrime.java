@@ -127,6 +127,9 @@ public class RecyclerViewAdapterCrime extends RecyclerView.Adapter<RecyclerViewA
             parentLayout = itemView.findViewById(R.id.parentLayout);
         }
     }
-
+    public void updateList(List<CrimesData> dataNames){
+        this.dataNames = dataNames;
+        notifyDataSetChanged();
+    }
 }
 

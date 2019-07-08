@@ -3,47 +3,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:orientation="vertical"
-    tools:context=".MainActivityCrime"
-    android:background="@drawable/background">
+    tools:context=".MainActivityCrime">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:gravity="center"
         android:text="Crime Records"
-        android:gravity="center"
-        android:textSize="32sp"
-        android:layout_margin="16dp"/>
+        android:textSize="32sp" />
 
     <TextView
+        android:id="@+id/latitude"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="Latitude"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:id="@+id/latitude"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Longitude"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:id="@+id/longitude"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:gravity="center"
-        android:textSize="18sp"
-        android:id="@+id/date"
-        android:layout_marginBottom="8dp"/>
+        android:textSize="18sp" />
 
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Longitude"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Date"
+        android:textSize="18sp" />
+
+    <ProgressBar
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_margin="32dp"
+        android:layout_weight="0.3" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_margin="8dp"/>
+        android:layout_margin="8dp"
+        android:layout_weight="1" />
+
 
 </LinearLayout>

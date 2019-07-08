@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailsCrimesSelectorActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    tools:context=".DetailsCrimesSelectorActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_margin="16dp"
+        android:gravity="center"
         android:text="Enter Date and Location"
-        android:textSize="32sp"
-        android:gravity="center"/>
+        android:textSize="32sp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:hint="Enter Latitude"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
 
         <EditText
             android:id="@+id/lngEditText"
@@ -63,7 +63,7 @@
             android:layout_margin="4dp"
             android:layout_weight="1"
             android:hint="Enter Longitude"
-            android:inputType="numberDecimal"/>
+            android:inputType="numberDecimal" />
     </LinearLayout>
 
     <TextView
@@ -75,14 +75,14 @@
         android:textSize="24sp" />
 
     <TextView
+        android:id="@+id/text3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/text"
         android:layout_centerHorizontal="true"
         android:layout_margin="8dp"
         android:text="Between June 2016 to May 2019"
-        android:textSize="16sp"
-        android:id="@+id/text3"/>
+        android:textSize="16sp" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -98,39 +98,40 @@
         android:orientation="horizontal">
 
         <com.weiwangcn.betterspinner.library.BetterSpinner
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:id="@+id/monthSpinner"
-            android:hint="Select Month"/>
-        <com.weiwangcn.betterspinner.library.BetterSpinner
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select Month" />
+
+        <com.weiwangcn.betterspinner.library.BetterSpinner
             android:id="@+id/yearSpinner"
-            android:hint="Select Year"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Select Year" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/invalid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/invalid"
-        android:text="Invalid Values Selected\nRefer Guidelines"
-        android:gravity="center"
         android:layout_below="@id/linearLayout2"
-        android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible"
-        android:textSize="24dp"/>
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:text="Invalid Values Selected\nRefer Guidelines"
+        android:textSize="24dp"
+        android:visibility="invisible" />
 
     <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Access Records"
-        android:id="@+id/button"
-        android:onClick="checker"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="24dp"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:onClick="checker"
+        android:text="Access Records" />
 
 </RelativeLayout>
