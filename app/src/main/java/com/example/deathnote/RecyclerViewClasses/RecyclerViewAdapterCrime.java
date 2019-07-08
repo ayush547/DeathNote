@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.deathnote.DataClass.CrimesData;
 import com.example.deathnote.DetailsCrimesActivity;
+import com.example.deathnote.OnSwipeTouchListener;
 import com.example.deathnote.R;
 import com.example.deathnote.SQL.SQLiteHelper;
 
@@ -97,6 +98,50 @@ public class RecyclerViewAdapterCrime extends RecyclerView.Adapter<RecyclerViewA
                 outToForce.putExtra("location_type",dataNames.get(i).getLocation_type());
                 outToForce.putExtra("date",dataNames.get(i).getMonth());
                 mContext.startActivity(outToForce);
+            }
+        });
+        viewHolder.parentLayout.setOnTouchListener(new OnSwipeTouchListener(mContext){
+            public void onSwipeRight(){
+                Log.d("RecyclerViewHolder","addToFav clicked for "+dataNames.get(i));
+                boolean exists = existsInFav(dataNames.get(i).getId());
+                if(exists){
+                    Toast.makeText(mContext,dataNames.get(i).getId()+" removed",Toast.LENGTH_SHORT).show();
+                    helper.DeleteByID(dataNames.get(i).getId());
+                    viewHolder.addToFav.setText("+");
+                    refreshStorageCopy();
+                }
+                else {
+                    Toast.makeText(mContext, dataNames.get(i).getId() + " added", Toast.LENGTH_SHORT).show();
+                    helper.InsertData(dataNames.get(i));
+                    viewHolder.addToFav.setText("-");
+                    refreshStorageCopy();
+                }
+                notifyDataSetChanged();
+            }
+            public void onSwipeLeft() {
+                Log.d("RecyclerViewHolder","addToFav clicked for "+dataNames.get(i));
+                boolean exists = existsInFav(dataNames.get(i).getId());
+                if(exists){
+                    Toast.makeText(mContext,dataNames.get(i).getId()+" removed",Toast.LENGTH_SHORT).show();
+                    helper.DeleteByID(dataNames.get(i).getId());
+                    viewHolder.addToFav.setText("+");
+                    refreshStorageCopy();
+                }
+                else {
+                    Toast.makeText(mContext, dataNames.get(i).getId() + " added", Toast.LENGTH_SHORT).show();
+                    helper.InsertData(dataNames.get(i));
+                    viewHolder.addToFav.setText("-");
+                    refreshStorageCopy();
+                }
+                notifyDataSetChanged();
+            }
+
+            public void onSwipeTop() {
+                Toast.makeText(mContext,"Swipe Right or Left to add\remove favs",Toast.LENGTH_SHORT);
+            }
+
+            public void onSwipeBottom() {
+                Toast.makeText(mContext,"Swipe Right or Left to add\remove favs",Toast.LENGTH_SHORT);
             }
         });
     }
